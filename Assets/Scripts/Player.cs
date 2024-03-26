@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Player : SingleTon<Player>
 {
-    [SerializeField] Rigidbody2D _rigidbody;
+    [SerializeField] Transform _transform;
 
-    float _speed = 100.0f;
+    float _speed = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +21,9 @@ public class Player : SingleTon<Player>
 
     #region Get
 
-    public Rigidbody2D GetRigidbody()
+    public Transform GetTransform()
     {
-        return _rigidbody;
+        return _transform;
     }
 
     public float GetSpeed()

@@ -6,12 +6,16 @@ using UnityEngine.EventSystems;
 
 public class FloatingJoystick : Joystick
 {
-    Rigidbody2D _player;
+    Transform _player;
+
+    Vector3 _moveDir;
     float _playerSpeed;
 
     private void Update()
     {
-        _player.velocity = new Vector2(Horizontal, Vertical) * _playerSpeed  * Time.deltaTime;
+        _moveDir = new Vector3(Horizontal, Vertical, 0).normalized;
+
+        _player.Translate(_moveDir * _playerSpeed * Time.deltaTime);
     }
 
     protected override void Start()
@@ -19,7 +23,7 @@ public class FloatingJoystick : Joystick
         base.Start();
         background.gameObject.SetActive(false);
 
-        _player = Player.Instance.GetRigidbody();
+        _player = Player.Instance.GetTransform();
         _playerSpeed = Player.Instance.GetSpeed();
     }
 
