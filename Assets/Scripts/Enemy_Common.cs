@@ -8,7 +8,7 @@ public class Enemy_Common : Enemy
     {
         _target = Player.Instance.GetTransform();
 
-        _hp = 10;
+        _hp = 3;
         _speed = 0.02f;
         _power = 1;
     }
@@ -17,6 +17,11 @@ public class Enemy_Common : Enemy
     public override void Move()
     {        
         transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed);
+    }
+
+    public override void Die()
+    {
+        EnemySpawner.Instance.PushToPool("Enemy_Common", gameObject);
     }
 
 }

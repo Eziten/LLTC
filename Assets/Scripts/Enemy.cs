@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     public virtual void Move() { }
     public virtual void Attack() { }
 
-    public virtual void Damage(int _damage)
+    public virtual void Damage(float _damage)
     {
         _hp -= _damage;
 
