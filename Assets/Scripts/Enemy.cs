@@ -19,11 +19,16 @@ public class Enemy : MonoBehaviour
     {
         _hp -= _damage;
 
-        if (_hp < 0)
+        if (_hp <= 0)
         {
             Die();
         }
     }
 
     public virtual void Die() { }
+
+    public float Power
+    {
+        get { return _power; }
+    }
 }

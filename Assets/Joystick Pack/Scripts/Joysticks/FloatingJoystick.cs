@@ -23,8 +23,8 @@ public class FloatingJoystick : Joystick
         base.Start();
         background.gameObject.SetActive(false);
 
-        _player = Player.Instance.GetTransform();
-        _playerSpeed = Player.Instance.GetSpeed();
+        _player = Player.Instance.Transform;
+        _playerSpeed = Player.Instance.Speed;
     }
 
     public override void OnPointerDown(PointerEventData eventData)

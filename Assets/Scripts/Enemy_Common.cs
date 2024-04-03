@@ -6,7 +6,7 @@ public class Enemy_Common : Enemy
 {
     public override void Set()
     {
-        _target = Player.Instance.GetTransform();
+        _target = Player.Instance.Transform;
 
         _hp = 3;
         _speed = 0.02f;

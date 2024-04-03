@@ -38,7 +38,7 @@ public class CameraController : SingleTon<CameraController>
         get
         {
             return sizeY + _camera.gameObject.transform.position.y;
-        }
+        } 
     }
 
     public float Left
