@@ -22,6 +22,8 @@ public class Enemy_Common : Enemy
     public override void Die()
     {
         EnemySpawner.Instance.PushToPool("Enemy_Common", gameObject);
+
+        Player.Instance.AddExp(30);
     }
 
 }

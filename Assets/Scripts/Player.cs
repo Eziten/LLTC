@@ -7,9 +7,14 @@ public class Player : SingleTon<Player>
 {
     [SerializeField] Transform _transform;
 
+    float _maxHp = 10f;
     float _hp = 10f;
+    int _lv = 0;
+    float _exp = 0;
     float _speed = 2.0f;
     bool _isDamage = false;
+
+    float[] MaxExpArray = new float[10] { 100, 150, 200, 250, 300, 350, 400, 450, 500, 550 };
 
     // Start is called before the first frame update
     void Start()
@@ -44,9 +49,33 @@ public class Player : SingleTon<Player>
             Die();
         }
 
+        GameUIMgr.Instance.HpBar.value = _hp / _maxHp;
+
         yield return new WaitForSeconds(0.2f);
 
         _isDamage = false;
+    }
+
+    public void AddExp(float _value)
+    {
+        if (_lv < MaxExpArray.Length)
+        {
+            _exp += _value;
+
+            if (_exp >= MaxExpArray[_lv])
+            {
+                LevelUp();
+            }
+
+            GameUIMgr.Instance.ExpBar.value = _exp / MaxExpArray[_lv];
+        }
+    }
+
+    void LevelUp()
+    {
+        _exp -= MaxExpArray[_lv];
+
+        _lv++;
     }
 
     void Die()
