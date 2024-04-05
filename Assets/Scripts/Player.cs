@@ -19,7 +19,7 @@ public class Player : SingleTon<Player>
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameUIMgr.Instance.SetLvText($"Lv.{_lv}");
     }
 
     // Update is called once per frame
@@ -76,6 +76,8 @@ public class Player : SingleTon<Player>
         _exp -= MaxExpArray[_lv];
 
         _lv++;
+
+        GameUIMgr.Instance.SetLvText($"Lv.{_lv}");
     }
 
     void Die()
