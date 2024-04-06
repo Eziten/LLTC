@@ -12,6 +12,7 @@ public class Player : SingleTon<Player>
     int _lv = 0;
     float _exp = 0;
     float _speed = 2.0f;
+    float _CheckItemRange = 1.0f;
     bool _isDamage = false;
 
     float[] MaxExpArray = new float[10] { 100, 150, 200, 250, 300, 350, 400, 450, 500, 550 };
@@ -25,7 +26,7 @@ public class Player : SingleTon<Player>
     // Update is called once per frame
     void Update()
     {
-        
+        CheckItem();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,6 +34,19 @@ public class Player : SingleTon<Player>
         if (collision.tag == "Enemy" && !_isDamage)
         {
             StartCoroutine(Damage(collision.GetComponent<Enemy>().Power));
+        }
+    }
+
+    void CheckItem()
+    {
+        Collider2D[] CheckItemArray = Physics2D.OverlapCircleAll(transform.position, _CheckItemRange);
+
+        foreach (Collider2D target in CheckItemArray)
+        {
+            if (target.tag == "Item")
+            {
+                target.GetComponent<Item>().MoveToPlayer(transform.position);
+            }
         }
     }
 
