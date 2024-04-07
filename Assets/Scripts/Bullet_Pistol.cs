@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -21,6 +22,11 @@ public class Bullet_Pistol : MonoBehaviour
         if (Target != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, Target.position, Speed);            
+        }
+
+        if (!Target.gameObject.activeSelf)
+        {
+            BulletSpawner.Instance.PushToPool("Bullet_Pistol", gameObject);
         }
     }
 
