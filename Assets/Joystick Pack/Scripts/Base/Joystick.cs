@@ -40,6 +40,18 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     private Vector2 input = Vector2.zero;
 
+    Transform _player;
+
+    Vector3 _moveDir;
+    float _playerSpeed;
+
+    private void Update()
+    {
+        _moveDir = new Vector3(Horizontal, Vertical, 0).normalized;
+
+        _player.Translate(_moveDir * _playerSpeed * Time.deltaTime);
+    }
+
     protected virtual void Start()
     {
         HandleRange = handleRange;
@@ -55,6 +67,12 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         handle.anchorMax = center;
         handle.pivot = center;
         handle.anchoredPosition = Vector2.zero;
+
+        if (canvas.renderMode == RenderMode.ScreenSpaceCamera)
+            cam = canvas.worldCamera;
+
+        _player = Player.Instance.Transform;
+        _playerSpeed = Player.Instance.Speed;
     }
 
     public virtual void OnPointerDown(PointerEventData eventData)

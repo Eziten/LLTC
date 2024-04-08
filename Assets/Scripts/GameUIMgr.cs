@@ -12,6 +12,11 @@ public class GameUIMgr : SingleTon<GameUIMgr>
     /// 0 : 현재 레벨
     /// </summary>
     [SerializeField] TextMeshProUGUI[] _Text;
+    /// <summary>
+    /// 0 : 고정형
+    /// 1 : 플로팅형
+    /// </summary>
+    [SerializeField] Joystick[] _Joysticks;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +26,17 @@ public class GameUIMgr : SingleTon<GameUIMgr>
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public Joystick FixedJoystick
+    {
+        get { return _Joysticks[0]; }
+    }
+
+    public Joystick FloatingJoystick
+    {
+        get { return _Joysticks[1]; }
     }
 
     public Slider HpBar
