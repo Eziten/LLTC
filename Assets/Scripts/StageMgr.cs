@@ -39,8 +39,6 @@ public class StageMgr : SingleTon<StageMgr>
         // 테스트 코드
         while (true)
         {
-            yield return new WaitForSeconds(5.0f);
-
             EnemySpawner.Instance.Spawn_EnemyCommon(SpawnCnt);
 
             WaveCnt++;
@@ -49,6 +47,8 @@ public class StageMgr : SingleTon<StageMgr>
             {
                 SpawnCnt++;
             }
+
+            yield return new WaitForSeconds(5.0f);            
         }
     }
 }
