@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class StageMgr : SingleTon<StageMgr>
 {
+    /// <summary>
+    /// 0 : ╩С
+    /// 1 : го
+    /// 2 : аб
+    /// 3 : ©Л
+    /// </summary>
+    [SerializeField] GameObject[] Walls;
+
     int[] EnemySpawnCntArray = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     int MaxWaveCnt;
     int WaveCnt;
     int SpawnCnt;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +58,21 @@ public class StageMgr : SingleTon<StageMgr>
             }
 
             yield return new WaitForSeconds(5.0f);            
+        }
+    }
+
+    public float GetWallPos(int _dir)
+    {
+        switch (_dir)
+        {
+            default:
+                return Walls[_dir].transform.position.y - 1f;
+            case 1:            
+                return Walls[_dir].transform.position.y + 1f;
+            case 2:
+                return Walls[_dir].transform.position.x + 1f;
+            case 3:
+                return Walls[_dir].transform.position.x - 1f;
         }
     }
 }

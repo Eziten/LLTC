@@ -30,11 +30,11 @@ public class Player : SingleTon<Player>
         CheckItem();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {        
-        if (collision.tag == "Enemy" && !_isDamage)
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy" && !_isDamage)
         {
-            StartCoroutine(Damage(collision.GetComponent<Enemy>().Power));
+            StartCoroutine(Damage(collision.gameObject.GetComponent<Enemy>().Power));
         }
     }
 

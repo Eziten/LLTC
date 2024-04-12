@@ -8,17 +8,18 @@ public class Bullet_Pistol : MonoBehaviour
 {
     Transform Target;
 
-    float Damage = 1f;
-    float Speed = 0.2f;
-    float LifeTime;
+    float Damage = 1.0f;
+    float Speed = 12.0f;
+    float LifeTime = 2.0f;
+
     Vector3 Direction;   
+
     [SerializeField]
     Rigidbody2D _rigidbody;
 
     private void OnEnable()
     {
-        // 데미지 세팅
-        LifeTime = 3.0f;
+        LifeTime = 2.0f;
     }
 
     // Update is called once per frame
@@ -32,23 +33,20 @@ public class Bullet_Pistol : MonoBehaviour
             {
                 BulletSpawner.Instance.PushToPool("Bullet_Pistol", gameObject);
             }
-        }               
-    }
 
-    
-    private void FixedUpdate()
-    {
+            _rigidbody.velocity = Direction * Speed;
+        }
+
         if (Target != null)
         {
-            _rigidbody.AddForce(Direction * Speed, ForceMode2D.Impulse);
+            _rigidbody.velocity = Direction * Speed;
         }
     }
-    
 
     public void SetTarget(Transform _target)
     {
         Target = _target;
-
+        
         Vector3 _distance = Target.position - transform.position;
         Direction = _distance.normalized;        
 
