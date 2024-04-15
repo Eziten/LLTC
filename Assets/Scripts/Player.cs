@@ -46,7 +46,7 @@ public class Player : SingleTon<Player>
         {
             if (target.tag == "Item")
             {
-                target.GetComponent<Item>().MoveToPlayer(transform.position);
+                target.GetComponent<Item>().MoveStart(transform.position);
             }
         }
     }
