@@ -6,27 +6,24 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Item : MonoBehaviour
 {
-    float _moveSpeed = 10.0f;
-    float _backMoveTime = 0.2f;
+    float _moveSpeed;
+    float _backMoveTime;
 
     Vector3 _targetPos;
-    bool _targetPosCheck = false;
-    bool _isMove = false;
+    bool _isMove;
 
     private void OnEnable()
     {
         _isMove = false;
-        _backMoveTime = 0.2f;
-        _moveSpeed = 3.0f;
+        _backMoveTime = 0.1f;
+        _moveSpeed = 5.0f;
     }
 
     public void MoveStart(Vector3 _target)
-    {
-        _isMove = true;
-
-        if (!_targetPosCheck)
+    {        
+        if (!_isMove)
         {
-            _targetPosCheck = true;
+            _isMove = true;
             _targetPos = _target;
         }
     }
@@ -39,7 +36,7 @@ public class Item : MonoBehaviour
 
         if (_backMoveTime > 0)
         {
-            _moveSpeed = 3.0f;
+            _moveSpeed = 5.0f;
 
             _backMoveTime -= Time.deltaTime;
 
