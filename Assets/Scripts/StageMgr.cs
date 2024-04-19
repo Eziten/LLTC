@@ -17,12 +17,15 @@ public class StageMgr : SingleTon<StageMgr>
     int WaveCnt;
     int SpawnCnt;
 
+    float SpawnDelay;
+
     // Start is called before the first frame update
     void Start()
     {
-        SpawnCnt = 5;
+        SpawnCnt = 8;
         MaxWaveCnt = EnemySpawnCntArray.Length;
         WaveCnt = 0;
+        SpawnDelay = 5.0f;
 
         StartCoroutine(SpawnEnemy());
     }
@@ -54,10 +57,15 @@ public class StageMgr : SingleTon<StageMgr>
 
             if (WaveCnt % 3 == 0)
             {
-                SpawnCnt++;
+                //SpawnCnt++;
+
+                if (SpawnDelay > 2.0f)
+                {
+                    SpawnDelay -= 0.2f;
+                }
             }
 
-            yield return new WaitForSeconds(5.0f);            
+            yield return new WaitForSeconds(SpawnDelay);            
         }
     }
 

@@ -7,7 +7,7 @@ public class Pistol : Weapon
     // Start is called before the first frame update
     void Start()
     {
-        AttackSpd = 0.6f;
+        AttackSpd = 0.8f;
         WaitTime = AttackSpd;
     }
 
