@@ -102,9 +102,7 @@ public class Player : SingleTon<Player>
 
     void Die()
     {
-        Time.timeScale = 0;
-
-        ResultMgr.Instance.Show();
+        GameUIMgr.Instance.SetGameState(GameState.Result);        
     }
 
     public Transform Transform 

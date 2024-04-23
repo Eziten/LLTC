@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using UnityEditor.Search;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class ResultMgr : Popup<ResultMgr>
+public class WaveClearMgr : Popup<WaveClearMgr>
 {
     public void Show()
     {
@@ -20,13 +21,5 @@ public class ResultMgr : Popup<ResultMgr>
     public void Click_Close()
     {
         Close();
-    }
-
-    public void Click_Restart()
-    {
-        Debug.Log("Restart");
-        Close();
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

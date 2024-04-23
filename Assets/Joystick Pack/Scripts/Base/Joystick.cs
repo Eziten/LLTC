@@ -47,6 +47,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     private void Update()
     {
+        if (!GameUIMgr.Instance.CheckInGame()) return;
+
         _moveDir = new Vector3(Horizontal, Vertical, 0).normalized;
 
         _player.Translate(_moveDir * _playerSpeed * Time.deltaTime);
@@ -82,6 +84,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!GameUIMgr.Instance.CheckInGame()) return;
+
         cam = null;
         if (canvas.renderMode == RenderMode.ScreenSpaceCamera)
             cam = canvas.worldCamera;

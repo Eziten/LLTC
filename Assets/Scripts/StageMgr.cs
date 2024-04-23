@@ -27,7 +27,7 @@ public class StageMgr : SingleTon<StageMgr>
         WaveCnt = 0;
         SpawnDelay = 5.0f;
 
-        StartCoroutine(SpawnEnemy());
+        GameUIMgr.Instance.SetGameState(GameState.WaveReady);
     }
 
     // Update is called once per frame
@@ -36,7 +36,7 @@ public class StageMgr : SingleTon<StageMgr>
         
     }
 
-    IEnumerator SpawnEnemy()
+    public IEnumerator SpawnEnemy()
     {
         /*
         while (WaveCnt < MaxWaveCnt)
@@ -49,7 +49,7 @@ public class StageMgr : SingleTon<StageMgr>
         } 
         */
         // 테스트 코드
-        while (true)
+        while (GameUIMgr.Instance.CheckInGame())
         {
             EnemySpawner.Instance.Spawn_EnemyCommon(SpawnCnt);
 

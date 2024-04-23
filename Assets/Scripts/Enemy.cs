@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     protected float _hp;
     
     private void OnEnable() { Set(); }
-    private void Update() { if (gameObject.activeSelf) Move(); }    
+    private void Update() { if (GameUIMgr.Instance.CheckInGame()) Move(); }    
     public virtual void Set() { }
     public virtual void Move() { }
     public virtual void Attack() { }

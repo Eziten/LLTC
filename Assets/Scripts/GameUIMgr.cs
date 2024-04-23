@@ -10,6 +10,8 @@ public class GameUIMgr : SingleTon<GameUIMgr>
     [SerializeField] Slider _ExpBar;
     /// <summary>
     /// 0 : 현재 레벨
+    /// 1 : 현재 웨이브 진행도
+    /// 2 : 현재 웨이브 남은 시간
     /// </summary>
     [SerializeField] TextMeshProUGUI[] _Text;
     /// <summary>
@@ -17,6 +19,10 @@ public class GameUIMgr : SingleTon<GameUIMgr>
     /// 1 : 플로팅형
     /// </summary>
     [SerializeField] Joystick[] _Joysticks;
+
+    GameState _GameState = GameState.WaveReady;
+    int _WaveCnt = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +33,73 @@ public class GameUIMgr : SingleTon<GameUIMgr>
     void Update()
     {
 
+    }
+
+    public void SetGameState(GameState state)
+    {
+        _GameState = state;
+
+        switch (_GameState)
+        {
+            case GameState.WaveReady:
+                StartCoroutine(WaveReady());
+                break;
+            case GameState.WaveStart:
+                WaveStart();
+                break;
+            case GameState.WaveEnd:
+                WaveEnd();
+                break;
+            case GameState.Result:
+                StopAllCoroutines();
+
+                ResultMgr.Instance.Show();
+                break;
+        }
+    }
+
+    IEnumerator WaveReady()
+    {
+        _Text[1].text = $"Wave {_WaveCnt + 1}";
+
+        yield return new WaitForSeconds(1.0f);
+
+        ToastMgr.Instance.Show($"Wave {_WaveCnt + 1}");
+
+        SetGameState(GameState.WaveStart);
+    }
+
+    void WaveStart()
+    {
+        StartCoroutine(StageMgr.Instance.SpawnEnemy());
+        StartCoroutine(WaveTimer(30));
+    }
+
+    void WaveEnd()
+    {
+        WaveClearMgr.Instance.Show();
+    }
+
+    public bool CheckInGame()
+    {
+        return _GameState == GameState.WaveStart;
+    }
+
+    IEnumerator WaveTimer(int _time)
+    {
+        for (int i = _time; i > 0; i--)
+        {
+            yield return new WaitForSeconds(1.0f);
+
+            _Text[2].text = string.Format("00:{0:D2}", i);
+        }
+
+        SetGameState(GameState.WaveEnd);
+    }
+
+    public GameState GetGameState()
+    {
+        return _GameState;
     }
 
     public Joystick FixedJoystick
