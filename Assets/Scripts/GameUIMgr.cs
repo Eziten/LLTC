@@ -125,4 +125,9 @@ public class GameUIMgr : SingleTon<GameUIMgr>
     {
         _Text[0].text = _value;
     }
+
+    public void AddWaveCnt()
+    {
+        _WaveCnt++;
+    }
 }

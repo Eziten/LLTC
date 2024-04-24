@@ -20,6 +20,11 @@ public class WaveClearMgr : Popup<WaveClearMgr>
 
     public void Click_Close()
     {
+        GameUIMgr.Instance.AddWaveCnt();
+        Player.Instance.ResetPos();
+
         Close();
+
+        GameUIMgr.Instance.SetGameState(GameState.WaveReady);
     }
 }

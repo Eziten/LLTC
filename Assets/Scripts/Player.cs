@@ -130,4 +130,10 @@ public class Player : SingleTon<Player>
     {
         return WeaponSlot[_IDX];
     }
+
+    public void ResetPos()
+    {
+        _transform.position = Vector3.zero;
+        //CameraController.Instance.
+    }
 }
